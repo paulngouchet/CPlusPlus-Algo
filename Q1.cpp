@@ -297,248 +297,176 @@ int main (){
 								}
 							}
 						}
-
-
-
-	  else if ( code1 == 'D' || code1 == 'd')
-	  {
-	  	int odd[2] ;
-	  	cout<< "Please enter command parameters: " ;
-	  	output<< "Please enter command parameters: " ;
-		int a = 0;
-	  	while( a<2)
-	  	{
-	  		cin>> odd[a] ;
-	  		output<< odd[a] << " " ;
-	  		a++ ;
-
-	  	}
-
-	  	output << endl ;
-
-	  	int number = 0 ;
-
-		int i = 0 ; 
-	  	cout<< odd[0] << " " ;
-	  	output<< odd[0] << " " ;
-
-	  	while (true)
-	  	{
-
-	  		number = findNextOddValue (odd[0]) ;
-
-	  		if ( ( (number + 1) == odd[1] ) || ((number + 2) == odd[1] ) )
-	  		{
-	  			cout << odd[1] << endl ;
-	  			output << odd[1] << endl ;
-	  			break ;
-	  		}
-
-            cout << number << " ";
-            cout << number << " ";
-
-           odd[0] = number ;
-
-         i++ ;
-
-         if ( i == ENTRIES)
-         	break ;
-     }
-
- }
-
-
- }
-
-
-
-else 
-cout << "Invalid command code " << endl ;
-
-}
-
-}
+						
+						else if ( code1 == 'D' || code1 == 'd'){
+							int odd[2] ;
+	  						cout<< "Please enter command parameters: " ;
+	  						output<< "Please enter command parameters: " ;
+							int a = 0;
+							
+							while( a<2){
+								cin>> odd[a] ;
+								output<< odd[a] << " " ;
+								a++ ;
+							}
+							
+							output << endl ;
+							int number = 0 ;
+							int i = 0 ; 
+							cout<< odd[0] << " " ;
+							output<< odd[0] << " " ;
+							
+							while (true){
+								number = findNextOddValue (odd[0]) ;
+								
+								if ( ( (number + 1) == odd[1] ) || ((number + 2) == odd[1] ) ){
+									cout << odd[1] << endl ;
+	  								output << odd[1] << endl ;
+	  								break ;
+								}
+								
+								cout << number << " ";
+								cout << number << " ";
+								odd[0] = number ;
+								i++ ;
+								
+								if ( i == ENTRIES)
+									break ;
+							}
+						}
+					}
+					
+					else 
+						cout << "Invalid command code " << endl ;
+				}
+			}
 
 // end of the if statement corresponding to the code "o" ot " O "
- 
-
-
-
-
-
-
-	  else if ( code == 'F' || code == 'f')  // if code == F or f  , it asks the user to enter a command parameter ( an integer) stored in input1 and calls the function  
-	    {									// the function factioral with that input .
-	      int input1 ;
-	      cout<<"Please enter command parameters: " ;
-	      cin>>input1 ;
-	      cout<<"factorial("<< input1 <<") "<<" = " << factorial(input1)<<endl ;
-	    }
-
-	  else if ( code == 'B' || code == 'b')  // if code == B or b , it asks the user to enter a command parameter ( an integer) stored in input2 and calls the function  
-	    {									// the function fibonacci with that input .
-	      int input2 ;							
-	      cout<<"Please enter command parameters: " ;
-	      cin>>input2 ;
-	      cout<<"fibonacci("<<input2<<") "<<" = " << fibonacci(input2)<<endl ;
-	    }
-
-
-
-
-
-
-
-	  else  if ( code == 'R' || code == 'r') // code == R or r  , it promts the user to enter the parameters , which are 3 doubles stored in input3[3] array 
-	    {									// it prints square root of the first number  to the square root of the final by delta incrementation and only stops for two reasons ( explained in the next part)
-	      double input3[3];
-	      cout<< "Please enter command parameters: ";
-		for( int i = 0 ; i<3 ; i++ )
-		  cin>> input3[i] ;   // stores the values in the array 
-	      if ( input3[2] <= 0 || (input3[0] > input3[1]))  // if input3[2] ( delta ) <= 0 and input3[0] ( first ) > input3[0] (last)  then it prints no computation needed .
-		cout<<"No computation needed."<< endl ;
-	      else 
-	      {
-	      	int i = 0 ;
-	      	while (true)    // infintie loop  that breaks only if a delta increment >= final or number of iteration of the calculation has exceeded 10 
-	      	{
-	      		if ( (input3[0]+ (input3[2]*i)) >= input3[1])
-	      		{
-
-	      			cout<<fixed << setprecision(4) << "Square root of "<< input3[1] << " = " << (findSqrtValue(input3[1]))<< endl ; // prints the square root of the final number and breaks the loop
-	      			break ;
-	      		}
-
-	      		cout<<fixed << setprecision(4) << "Square root of "<< input3[0] + (input3[2]*i) << " = " << (findSqrtValue(input3[0] + (input3[2]*i)))<< endl ;
-	      		// prints the square root of the first number at the first iterattion and  then the square root of the first by delta increments at successive iteration of the loop 
-	      		i++ ;  
-
-	      		if ( i == ENTRIES)   // breaks the loop if i == 10 ;
-	      			break;
-
-	      	}
-	      }
-	  }
-
-
-
-	  else  if ( code == 'L' || code == 'l') // code == L or l  , it promts the user to enter the parameters , which are 3 doubles stored in input4[3] array 
-	    {      								// it prints natural log of the first number  to the natural log of the final by delta incrementation and only stops for two reasons ( explained in the next part)
-	      double input4[3];
-	      cout<< "Please enter command parameters: " ;
-		for( int i = 0 ; i<3 ; i++ )
-		  cin>> input4[i] ;				 // stores the values in the array 
-	      if ( input4[2] <= 0 || (input4[0] > input4[1]))  // if input4[2] ( delta ) <= 0 and input4[0] ( first ) > input4[1] (last)  then it prints no computation needed .
-		cout<<"No computation needed."<< endl ;
-	      else
-	      {
-	      	int i = 0 ;
-	      	while (true)  // infintie loop  that breaks only if a delta increment >= final or number of iteration of the calculation has exceeded 10 
-	      	{
-	      		if ( (input4[0]+ (input4[2]*i)) >= input4[1])
-	      		{
-
-	      			cout<<fixed << setprecision(4) << "Natural log of "<< input4[1] << " = " << (naturalLog(input4[1]))<< endl ; // prints the natural log of the final number and breaks the loop
-	      			break ;
-	      		}
-
-	      		cout<<fixed << setprecision(4) << "Natural log of "<< input4[0] + (input4[2]*i) << " = " << (naturalLog(input4[0] + (input4[2]*i)))<< endl ;
-	      		i++ ; // prints the natural log of the first number at the first iterattion and  then the natural log of the first by delta increments at successive iteration of the loop 
-
-	      		if ( i == ENTRIES)  // breaks the loop if i == 10 ;
-	      			break;
-
-	      	}
-	      }
-	  }
-
-
-else  if ( code == 'N' || code == 'n')  // code == N or n  , it promts the user to enter the parameters , which are 3 doubles stored in input5[3] array 
-	    {								// it prints nyancat value of the first number  to the nyancat value of the final by delta incrementation and only stops for two reasons ( explained in the next part)
-	      double input5[3];
-	      cout<< "Please enter command parameters: " ;
-		for( int i = 0 ; i<3 ; i++ )
-		  cin>> input5[i] ;			// stores the values in the array
-	      if ( input5[2] <= 0 || (input5[0] > input5[1])) // if input5[2] ( delta ) <= 0 and input5[0] ( first ) > input5[1] (last)  then it prints no computation needed .
-		cout<<"No computation needed."<< endl ;
-	      else if (true)
-	      {
-	      	int i = 0 ;
-	      	while (true)  // infintie loop  that breaks only if a delta increment >= final or number of iteration of the calculation has exceeded 10 
-	      	{
-	      		if ( (input5[0]+ (input5[2]*i)) >= input5[1])
-	      		{
-
-	      			cout<<fixed << setprecision(4) << "NyanCat value of "<< input5[1] << " = " << (findNyanCatValue(input5[1]))<< endl ; // prints the nyancat value of the final number and breaks the loop
-	      			break ;
-	      		}
-
-	      		cout<<fixed << setprecision(4) << "Nyancat value of "<< input5[0] + (input5[2]*i) << " = " << (findNyanCatValue(input5[0] + (input5[2]*i)))<< endl ;
-	      		i++ ;  // prints the nyancat value of the first number at the first iterattion and  then the nyancat value of the first by delta increments at successive iteration of the loop 
-
-	      		if ( i == ENTRIES ) // breaks the loop if i == 10 ;
-	      			break;
-
-	      	}
-	      }
-	  }
-
-
-
-	  else if ( code == 'D' || code == 'd')    // if code == D OR d , it promts the user to enter the parameters  ( two integers )
-	  {											// this statement prints the first integer and the odd integers following until it reached the second integer ( final ) , it stops for two reason ( explained in the next part )
-	  	int odd[2] ;
-	  	cout<< "Please enter command parameters: " ;
-	  	for ( int i = 0 ; i < 2 ; i++ )
-	  		cin>> odd[i] ;   // those two integers are stored in the array odd[2]
-
-	  	int number = 0 ;
-
-		int i = 0 ; 
-	  	cout<< odd[0] << " " ;
-
-	  	while (true)
-	  	{
-
-	  		number = findNextOddValue (odd[0]) ;
-
-	  		if ( ( (number + 1) == odd[1] ) || ((number + 2) == odd[1] ) ) // when the program feels like it is close to last number , it prints the last number and breaks .
-	  		{
-	  			cout << odd[1] << endl ;
-	  			break ;
-	  		}
-
-            cout << number << " ";
-
-           odd[0] = number ;
-
-         i++ ;
-
-         if ( i == ENTRIES)  // break if the has been more than 10 interations of the loop . 
-         	break ;
-     }
-
- }
-
-
-
-	 
-	} 
-	
-      else 
-	{
-	  cout << "Invalid command code" << endl ;  // prints an error message because the command code is invalid . 
+			else if ( code == 'F' || code == 'f') { // if code == F or f  , it asks the user to enter a command parameter ( an integer) stored in input1 and calls the function 									// the function factioral with that input .
+				int input1 ;
+	      			cout<<"Please enter command parameters: " ;
+	      			cin>>input1 ;
+	      			cout<<"factorial("<< input1 <<") "<<" = " << factorial(input1)<<endl ;
+			}
+			else if ( code == 'B' || code == 'b'){  // if code == B or b , it asks the user to enter a command parameter ( an integer) stored in input2 and calls the function  									// the function fibonacci with that input .
+				int input2 ;							
+				cout<<"Please enter command parameters: " ;
+	      			cin>>input2 ;
+	      			cout<<"fibonacci("<<input2<<") "<<" = " << fibonacci(input2)<<endl ;
+			}
+			
+			else  if ( code == 'R' || code == 'r'){ // code == R or r  , it promts the user to enter the parameters , which are 3 doubles stored in input3[3] array 									// it prints square root of the first number  to the square root of the final by delta incrementation and only stops for two reasons ( explained in the next part)
+				double input3[3];
+				cout<< "Please enter command parameters: ";
+				
+				for( int i = 0 ; i<3 ; i++ )
+					cin>> input3[i] ;   // stores the values in the array 
+				
+				if ( input3[2] <= 0 || (input3[0] > input3[1]))  // if input3[2] ( delta ) <= 0 and input3[0] ( first ) > input3[0] (last)  then it prints no computation needed .
+					cout<<"No computation needed."<< endl ;
+				else {
+					int i = 0 ;
+					
+					while (true){    // infintie loop  that breaks only if a delta increment >= final or number of iteration of the calculation has exceeded 10 
+						if ( (input3[0]+ (input3[2]*i)) >= input3[1]){
+							cout<<fixed << setprecision(4) << "Square root of "<< input3[1] << " = " << (findSqrtValue(input3[1]))<< endl ; // prints the square root of the final number and breaks the loop
+							break ;
+						}
+						
+						cout<<fixed << setprecision(4) << "Square root of "<< input3[0] + (input3[2]*i) << " = " << (findSqrtValue(input3[0] + (input3[2]*i)))<< endl ;
+						// prints the square root of the first number at the first iterattion and  then the square root of the first by delta increments at successive iteration of the loop 
+						i++ ;  
+						
+						if ( i == ENTRIES)   // breaks the loop if i == 10 ;
+							break;
+					}
+				}
+			}
+			
+			else  if ( code == 'L' || code == 'l'){ // code == L or l  , it promts the user to enter the parameters , which are 3 doubles stored in input4[3] array       								// it prints natural log of the first number  to the natural log of the final by delta incrementation and only stops for two reasons ( explained in the next part)
+				double input4[3];
+				cout<< "Please enter command parameters: " ;
+				
+				for( int i = 0 ; i<3 ; i++ )
+					cin>> input4[i] ;				 // stores the values in the array 
+				
+				if ( input4[2] <= 0 || (input4[0] > input4[1]))  // if input4[2] ( delta ) <= 0 and input4[0] ( first ) > input4[1] (last)  then it prints no computation needed .
+					cout<<"No computation needed."<< endl ;
+				else{
+					int i = 0 ;
+					while (true){  // infintie loop  that breaks only if a delta increment >= final or number of iteration of the calculation has exceeded 10 
+						if ( (input4[0]+ (input4[2]*i)) >= input4[1]){
+							cout<<fixed << setprecision(4) << "Natural log of "<< input4[1] << " = " << (naturalLog(input4[1]))<< endl ; // prints the natural log of the final number and breaks the loop
+							break ;
+						}
+						
+						cout<<fixed << setprecision(4) << "Natural log of "<< input4[0] + (input4[2]*i) << " = " << (naturalLog(input4[0] + (input4[2]*i)))<< endl ;
+						i++ ; // prints the natural log of the first number at the first iterattion and  then the natural log of the first by delta increments at successive iteration of the loop 
+						
+						if ( i == ENTRIES)  // breaks the loop if i == 10 ;
+							break;
+					}
+				}
+			}
+			
+			else  if ( code == 'N' || code == 'n'){  // code == N or n  , it promts the user to enter the parameters , which are 3 doubles stored in input5[3] array 								// it prints nyancat value of the first number  to the nyancat value of the final by delta incrementation and only stops for two reasons ( explained in the next part)
+				double input5[3];
+				cout<< "Please enter command parameters: " ;
+				
+				for( int i = 0 ; i<3 ; i++ )
+					cin>> input5[i] ;			// stores the values in the array
+				
+				if ( input5[2] <= 0 || (input5[0] > input5[1])) // if input5[2] ( delta ) <= 0 and input5[0] ( first ) > input5[1] (last)  then it prints no computation needed 
+					cout<<"No computation needed."<< endl ;
+				else if (true){
+					int i = 0 ;
+					
+					while (true){  // infintie loop  that breaks only if a delta increment >= final or number of iteration of the calculation has exceeded 10 
+						if ( (input5[0]+ (input5[2]*i)) >= input5[1])
+						{
+							cout<<fixed << setprecision(4) << "NyanCat value of "<< input5[1] << " = " << (findNyanCatValue(input5[1]))<< endl ; // prints the nyancat value of the final number and breaks the loop
+							break ;
+						}
+						
+						cout<<fixed << setprecision(4) << "Nyancat value of "<< input5[0] + (input5[2]*i) << " = " << (findNyanCatValue(input5[0] + (input5[2]*i)))<< endl ;
+						i++ ;  // prints the nyancat value of the first number at the first iterattion and  then the nyancat value of the first by delta increments at successive iteration of the loop 
+						
+						if ( i == ENTRIES ) // breaks the loop if i == 10 ;
+							break;
+					}
+				}
+			}
+			else if ( code == 'D' || code == 'd'){    // if code == D OR d , it promts the user to enter the parameters  ( two integers )											// this statement prints the first integer and the odd integers following until it reached the second integer ( final ) , it stops for two reason ( explained in the next part )
+				int odd[2] ;
+				cout<< "Please enter command parameters: " ;
+				
+				for ( int i = 0 ; i < 2 ; i++ )
+					cin>> odd[i] ;   // those two integers are stored in the array odd[2]
+				
+				int number = 0 ;
+				int i = 0 ; 
+	  			cout<< odd[0] << " " ;
+				
+				while (true){
+					number = findNextOddValue (odd[0]) ;
+					if ( ( (number + 1) == odd[1] ) || ((number + 2) == odd[1] ) ){ // when the program feels like it is close to last number , it prints the last number and breaks .
+						cout << odd[1] << endl ;
+						break ;
+					}
+					
+					cout << number << " ";
+					odd[0] = number ;
+					i++ ;
+					
+					if ( i == ENTRIES)  // break if the has been more than 10 interations of the loop . 
+						break ;
+				}
+			}
+		} 
+		else {
+			cout << "Invalid command code" << endl ;  // prints an error message because the command code is invalid . 
+		}
 	}
-
-}
-
-
+	
 	return 0 ;
-
 }
-
-
-
-
-
-
