@@ -5,484 +5,298 @@
 using namespace std ;
 
 extern const int ENTRIES = 10 ;
-
-int main ()
-
-{
-
- initialize() ; // Iniatilize the program with the header 
-
-  while ( true )  // enters an infinite loop that will breaks when the program press 'Q' or 'q'
-    {
-      char code ; 
-
-      cout<< "Please enter command code: "  ;  // Asks the user to enter a command code 
-      cin>> code ; 								// save it in the variable code 
-
-      	if ( checkCode(code ))    // check the command code entered by the user is right , enter the if statement if yes , if not prints an error message 
-	{
-
-	  if ( code == 'Q' || code == 'q')			// check if code == q or Q , terminates the program if true , continue the program if not .
-			return 0 ;
-
-
-		else if ( code == 'I' || code == 'i')	// if  code == i or I it reads data from file by calling a function readDataFromFile which parameter is the name of the file entered by the user .
-		{
-
-
-
-		string filename ;
-      cout<< "Please enter command parameters: " ;
-      cin>> filename ;
-
-		readDataFromFile ( filename.c_str()) ;
-	}
-
-
-		
-		else if ( code == 'O' || code =='o') // if code == 'O' or 'o' it copy first the successive output of the program in an intermediate file "filesavior.txt" 
-		{										// then copies all the contents of that file in the file named by the user by calling the function WriteDataToFile when the user enter Q or q to terminates program .
-			string filename1 ;
-			cout<< "Please enter command parameters: " ;
-			cin>> filename1 ;
-
-			ofstream output ;
-
-			output.open("filesavior.txt") ;
-
-
-
-			while ( true )     // all the lines in this if statement are just a copy of the different possible cases of the program except that " output "is used  each time after "cout" to copy the outputs 
-			{					// in the intermeadiate file " filesavior.txt" as described in the top .
-								// all the functionality of the program is explained later at the end of this if statement .
-				char code1 ;
-				cout << "Please enter command code: " ; 
-				cin>> code1 ;
-				output<< "Please enter command code: " << code1 << endl ;
-
-				if (checkCode(code1))
-				{
-				
-
-					if ( code1 == 'Q' || code1 == 'q')
-					{
-						writeDataToFile ( filename1.c_str()) ;
-
-						return 0 ;
-					}
-
-
-			else if ( code1 == 'F' || code1 == 'f')
-	    	{
-	    		
-	      int input1 ;
-	      cout<<"Please enter command parameters: " ;
-	      cin>>input1 ;
-	      cout<<"factorial("<<input1<<") "<<"= " << factorial(input1)<<endl ;
-
-	      output<< "Please enter command parameters: " << input1 << endl ;
-	      output<<"factorial("<<input1<<") "<<" = " << factorial(input1)<<endl ;
-
-
-	    }
-
-
-	    else if ( code1 == 'I' || code1 == 'i')
-	    {
-	    	string filename ;
-
-	    	cout<< "Please enter command parameters: " ;
-	    	output<< "Please enter command parameters: " ;
-	    	cin>> filename ;
-	    	output<< filename  << endl ; 
-
-  		ifstream input ;
-      input.open(filename) ;
-
-      char letter ;
-
-      double myarray[3] = { 0 , 0 , 0} ;
-
-
-
-
-      while ( !(input.eof()))
-      {
-
-      input>> letter ;
-
-      if ( letter == 'F' || letter == 'f')
-      input>> myarray[0] ;
-
-    else if ( letter == 'B' || letter == 'b')
-      input>> myarray[0]  ;
-
-
-    else if ( letter == 'R' || letter == 'r')
-      input>> myarray[0] >> myarray[1] >> myarray[2] ;
-
-    else if ( letter == 'L' || letter == 'l')
-      input>> myarray[0] >> myarray[1] >> myarray[2] ;
-
-    else if ( letter == 'N' || letter == 'n')
-      input>> myarray[0] >> myarray[1] >> myarray[2] ;
-
-    else if ( letter == 'D' || letter == 'd')
-      input>> myarray[0] >> myarray[1] ;
-
-
-      if (checkCode(letter))
-        {
-        
-
-
-      if ( letter == 'F' || letter == 'f')
-        {
-          
-        cout<<"factorial("<<myarray[0]<<") "<<"= " << factorial((int)myarray[0])<<endl ;
-        output<<"factorial("<<myarray[0]<<") "<<"= " << factorial((int)myarray[0])<<endl ;
-
-
-      }
-
-
-    else if ( letter == 'B' || letter =='b')
-      {
-    
-        cout<<"fibonacci"<<myarray[0]<<") "<<" = " << fibonacci((int)myarray[0])<<endl ;
-		output<<"fibonacci"<<myarray[0]<<") "<<" = " << fibonacci((int)myarray[0])<<endl ;
-
-
-      }
-
-
-
-
-
-
-
-    else  if ( letter == 'R' || letter == 'r')
-      {
-       
-
-        if ( myarray[2] <= 0 || (myarray[0] > myarray[1]))
-        {
-    cout<<"No computation needed."<< endl ;
-    output<<"No computation needed."<< endl ;
-
-      }
-        else
-        {
-          int i = 0 ;
-          while (true)
-          {
-            if ( (myarray[0]+ (myarray[2]*i)) >= myarray[1])
-            {
-
-               
-              cout<<fixed << setprecision(4) << "Square root of "<< myarray[1] << " = " << (findSqrtValue(myarray[1]))<< endl ;
-              output<<fixed << setprecision(4) << "Square root of "<< myarray[1] << " = " << (findSqrtValue(myarray[1]))<< endl ;
-              break ;
-
-            }
-
-            cout<<fixed << setprecision(4) << "Square root of "<< myarray[0] + (myarray[2]*i) << " = " << (findSqrtValue(myarray[0] + (myarray[2]*i)))<< endl ;
-            output<<fixed << setprecision(4) << "Square root of "<< myarray[0] + (myarray[2]*i) << " = " << (findSqrtValue(myarray[0] + (myarray[2]*i)))<< endl ;
-            i++ ;
-
-            if ( i == ENTRIES)
-              break;
-
-          }
-        }
-     }
-
-  
-
-
-
-
-
-
-
-    else  if ( letter == 'L' || letter == 'l')
-      {
-        
-        if ( myarray[2] <= 0 || (myarray[0] > myarray[1]))
-        {
-    cout<<"No computation needed."<< endl ;
-    output<<"No computation needed."<< endl ;
-      }
-        else
-        {
-          int i = 0 ;
-          while (true)
-          {
-            if ( (myarray[0]+ (myarray[2]*i)) >= myarray[1])
-            {
-
-              cout<<fixed << setprecision(4) << "Natural log of "<< myarray[1] << " = " << (naturalLog(myarray[1]))<< endl ;
-              output<<fixed << setprecision(4) << "Natural log of "<< myarray[1] << " = " << (naturalLog(myarray[1]))<< endl ;
-              
-              break ;
-            }
-
-            cout<<fixed << setprecision(4) << "Natural log of "<< myarray[0] + (myarray[2]*i) << " = " << (naturalLog(myarray[0] + (myarray[2]*i)))<< endl ;
-            output<<fixed << setprecision(4) << "Natural log of "<< myarray[0] + (myarray[2]*i) << " = " << (naturalLog(myarray[0] + (myarray[2]*i)))<< endl ;
-            
-            i++ ;
-
-            if ( i == ENTRIES)
-              break;
-
-          }
-        }
-    }
-
-
-
-
-
-else  if ( letter == 'N' || letter == 'n')
-      {
-       
-        if ( myarray[2] <= 0 || myarray[0] > myarray[1])
-        {
-    cout<<"No computation needed."<< endl ;
-    output<<"No computation needed."<< endl ;
-      }
-        else  
-        {
-          int i = 0 ;
-          while (true)
-          {
-            if ( (myarray[0]+ (myarray[2]*i)) >= myarray[1])
-            {
-
-              cout<<fixed << setprecision(4) << "NyanCat value of "<< myarray[1] << " = " << (findNyanCatValue(myarray[1]))<< endl ;
-              output<<fixed << setprecision(4) << "NyanCat value of "<< myarray[1] << " = " << (findNyanCatValue(myarray[1]))<< endl ;
-
-              break ;
-            }
-
-            cout<<fixed << setprecision(4) << "Nyancat value of "<< myarray[0] + (myarray[2]*i) << " = " << (findNyanCatValue(myarray[0] + (myarray[2]*i)))<< endl ;
-            output<<fixed << setprecision(4) << "Nyancat value of "<< myarray[0] + (myarray[2]*i) << " = " << (findNyanCatValue(myarray[0] + (myarray[2]*i)))<< endl ;
-            i++ ;
-
-            if ( i == ENTRIES )
-              break;
-
-          }
-        }
-    }
-
-
-
-    else if ( letter == 'D' || letter == 'd')
-    {
-
-
-      int number = 0 ;
-
-    int i = 0 ; 
-      cout<< myarray[0] << " " ; ;
-      output<< myarray[0] << " " ; ;
-
-      while (true)
-      {
-
-        number = findNextOddValue ((int)myarray[0]) ;
-
-        if ( ( (number + 1) == (int)myarray[1] ) || ((number + 2) == (int)myarray[1] ) )
-        {
-          cout << myarray[1] << endl ;
-          output << myarray[1] << endl ;
-          break ;
-        }
-
-            cout << number << " ";
-            output << number << " ";
-
-           myarray[0] = number ;
-
-         i++ ;
-
-         if ( i == ENTRIES)
-          break ;
-     }
-
- }
-
-
- }
-
-    }
-
-
-	    }
-
-
-	  else if ( code1 == 'B' || code1 =='b')
-	    {
-	      int input2 ;
-	      cout<<"Please enter command parameters: " ;
-	      cin>>input2 ;
-	      cout<<"fibonacci"<<input2<<") "<<" = " << fibonacci(input2)<<endl ;
-
-		  output<< "Please enter command parameters: " << input2 << endl ;
-		  output<<"fibonacci("<<input2<<") "<<" = " << fibonacci(input2)<<endl ;
-
-	    }
-
-
-
-
-
-
-
-	  else  if ( code1 == 'R' || code1 == 'r')
-	    {
-	      double input3[3];
-	      cout<< "Please enter command parameters: ";
-	      output<< "Please enter command parameters: ";
-		for( int i = 0 ; i<3 ; i++ )
-		{
-		  cin>> input3[i] ;
-		  output << input3[i] << " " ;
-		 
-		}
-
-		output<< endl ;
-
-	      if ( input3[2] <= 0 || (input3[0] > input3[1]))
-	      {
-		cout<<"No computation needed."<< endl ;
-		output<<"No computation needed."<< endl ;
-
-			}
-	      else
-	      {
-	      	int i = 0 ;
-	      	while (true)
-	      	{
-	      		if ( (input3[0]+ (input3[2]*i)) >= input3[1])
-	      		{
-
-	      			 
-	      			cout<<fixed << setprecision(4) << "Square root of "<< input3[1] << " = " << (findSqrtValue(input3[1]))<< endl ;
-	      			output<<fixed << setprecision(4) << "Square root of "<< input3[1] << " = " << (findSqrtValue(input3[1]))<< endl ;
-	      			break ;
-
-	      		}
-
-	      		cout<<fixed << setprecision(4) << "Square root of "<< input3[0] + (input3[2]*i) << " = " << (findSqrtValue(input3[0] + (input3[2]*i)))<< endl ;
-	      		output<<fixed << setprecision(4) << "Square root of "<< input3[0] + (input3[2]*i) << " = " << (findSqrtValue(input3[0] + (input3[2]*i)))<< endl ;
-	      		i++ ;
-
-	      		if ( i == ENTRIES)
-	      			break;
-
-	      	}
-	      }
-	   }
-
+int main (){
+	initialize() ; // Iniatilize the program with the header 
 	
-
-
-
-
-
-
-
-	  else  if ( code1 == 'L' || code1 == 'l')
-	    {
-	      double input4[3];
-	      cout<< "Please enter command parameters: " ;
-	      output<< "Please enter command parameters: " ;
-	      int i = 0 ;
-		while(i<3) 
-		{
-		  cin>> input4[i] ;
-		  output<< input4[i] << " " ;
-		  i++ ;
-		}
-
-		output << endl ;
-	      if ( input4[2] <= 0 || (input4[0] > input4[1]))
-	      {
-		cout<<"No computation needed."<< endl ;
-		output<<"No computation needed."<< endl ;
+	while(true){ 
+		char code ; 
+		cout<< "Please enter command code: "  ;  // Asks the user to enter a command code 
+     		cin>> code ; 								// save it in the variable code 
+		
+		if( checkCode(code )){    // check the command code entered by the user is right , enter the if statement if yes , if not prints an error message 
+			if ( code == 'Q' || code == 'q')			// check if code == q or Q , terminates the program if true , continue the program if not .
+				return 0 ;
+			else if ( code == 'I' || code == 'i'){	// if  code == i or I it reads data from file by calling a function readDataFromFile which parameter is the name of the file entered by the user .
+				string filename ;
+      				cout<< "Please enter command parameters: " ;
+      				cin>> filename ;
+				readDataFromFile ( filename.c_str()) ;
 			}
-	      else
-	      {
-	      	int i = 0 ;
-	      	while (true)
-	      	{
-	      		if ( (input4[0]+ (input4[2]*i)) >= input4[1])
-	      		{
-
-	      			cout<<fixed << setprecision(4) << "Natural log of "<< input4[1] << " = " << (naturalLog(input4[1]))<< endl ;
-	      			output<<fixed << setprecision(4) << "Natural log of "<< input4[1] << " = " << (naturalLog(input4[1]))<< endl ;
-	      			break ;
-	      		}
-
-	      		cout<<fixed << setprecision(4) << "Natural log of "<< input4[0] + (input4[2]*i) << " = " << (naturalLog(input4[0] + (input4[2]*i)))<< endl ;
-	      		output<<fixed << setprecision(4) << "Natural log of "<< input4[0] + (input4[2]*i) << " = " << (naturalLog(input4[0] + (input4[2]*i)))<< endl ;
-	      		i++ ;
-
-	      		if ( i == ENTRIES)
-	      			break;
-
-	      	}
-	      }
-	  }
-
-
-
-
-
-else  if ( code1 == 'N' || code1 == 'n')
-	    {
-	      double input5[3];
-	      cout<< "Please enter command parameters: " ;
-	      output<< "Please enter command parameters: " ;
-	      int i = 0 ;
-		while ( i <3 ) 
-		{
-		  cin>> input5[i] ;
-		  output<< input5[i] << " ";
-		  i++ ;
-		}
-
-		output<<endl ;
-	      if ( input5[2] <= 0 || (input5[0] > input5[1]))
-	      {
-		cout<<"No computation needed."<< endl ;
-		output<<"No computation needed."<< endl ;
-			}
-	      else  
-	      {
-	      	int i = 0 ;
-	      	while (true)
-	      	{
-	      		if ( (input5[0]+ (input5[2]*i)) >= input5[1])
-	      		{
-
-	      			cout<<fixed << setprecision(4) << "NyanCat value of "<< input5[1] << " = " << (findNyanCatValue(input5[1]))<< endl ;
-	      			output<<fixed << setprecision(4) << "NyanCat value of "<< input5[1] << " = " << (findNyanCatValue(input5[1]))<< endl ;
-	      			break ;
-	      		}
-
-	      		cout<<fixed << setprecision(4) << "Nyancat value of "<< input5[0] + (input5[2]*i) << " = " << (findNyanCatValue(input5[0] + (input5[2]*i)))<< endl ;
-	      		output<<fixed << setprecision(4) << "Nyancat value of "<< input5[0] + (input5[2]*i) << " = " << (findNyanCatValue(input5[0] + (input5[2]*i)))<< endl ;
-	      		i++ ;
-
-	      		if ( i == ENTRIES )
-	      			break;
-
-	      	}
-	      }
-	  }
+			else if ( code == 'O' || code =='o'){ // if code == 'O' or 'o' it copy first the successive output of the program in an intermediate file "filesavior.txt" 										// then copies all the contents of that file in the file named by the user by calling the function WriteDataToFile when the user enter Q or q to terminates program .
+				string filename1 ;
+				cout<< "Please enter command parameters: " ;
+				cin>> filename1 ;
+				ofstream output ;
+				output.open("filesavior.txt") ;
+				
+				while(true){    // all the lines in this if statement are just a copy of the different possible cases of the program except that " output "is used  each time after "cout" to copy the outputs 					// in the intermeadiate file " filesavior.txt" as described in the top .
+					// all the functionality of the program is explained later at the end of this if statement .
+					char code1 ;
+					cout << "Please enter command code: " ; 
+					cin>> code1 ;
+					output<< "Please enter command code: " << code1 << endl ;
+					
+					if (checkCode(code1)){
+						if ( code1 == 'Q' || code1 == 'q'){
+							writeDataToFile ( filename1.c_str()) ;
+							return 0 ;
+						}
+						else if ( code1 == 'F' || code1 == 'f'){
+							int input1 ;
+	      						cout<<"Please enter command parameters: " ;
+	     						cin>>input1 ;
+	     						cout<<"factorial("<<input1<<") "<<"= " << factorial(input1)<<endl ;
+	     	 					output<< "Please enter command parameters: " << input1 << endl ;
+	      						output<<"factorial("<<input1<<") "<<" = " << factorial(input1)<<endl ;
+						}
+						else if (code1 == 'I' || code1 == 'i'){
+							string filename ;
+	    						cout<< "Please enter command parameters: " ;
+	    						output<< "Please enter command parameters: " ;
+	    						cin>> filename ;
+	    						output<< filename  << endl ; 
+							ifstream input ;
+      							input.open(filename) ;
+							char letter ;
+      							double myarray[3] = { 0 , 0 , 0} ;
+							
+							while ( !(input.eof())){
+								input>> letter ;
+								if ( letter == 'F' || letter == 'f')
+									input>> myarray[0] ;
+								else if ( letter == 'B' || letter == 'b')
+									input>> myarray[0]  ;
+								else if ( letter == 'R' || letter == 'r')
+									input>> myarray[0] >> myarray[1] >> myarray[2] ;
+								else if ( letter == 'L' || letter == 'l')
+									input>> myarray[0] >> myarray[1] >> myarray[2] ;
+								else if ( letter == 'N' || letter == 'n')
+									input>> myarray[0] >> myarray[1] >> myarray[2] ;
+								else if ( letter == 'D' || letter == 'd')
+									input>> myarray[0] >> myarray[1] ;
+								
+								if (checkCode(letter)){
+									if ( letter == 'F' || letter == 'f'){
+										cout<<"factorial("<<myarray[0]<<") "<<"= " << factorial((int)myarray[0])<<endl ;
+        									output<<"factorial("<<myarray[0]<<") "<<"= " << factorial((int)myarray[0])<<endl ;
+									}
+									else if ( letter == 'B' || letter =='b'){
+										cout<<"fibonacci"<<myarray[0]<<") "<<" = " << fibonacci((int)myarray[0])<<endl ;
+										output<<"fibonacci"<<myarray[0]<<") "<<" = " << fibonacci((int)myarray[0])<<endl ;
+									}
+									else  if ( letter == 'R' || letter == 'r'){
+										if ( myarray[2] <= 0 || (myarray[0] > myarray[1])){
+											cout<<"No computation needed."<< endl ;
+											output<<"No computation needed."<< endl ;
+										}
+										else{
+											int i = 0 ;
+											
+											while (true){
+												if ( (myarray[0]+ (myarray[2]*i)) >= myarray[1]){   
+													cout<<fixed << setprecision(4) << "Square root of "<< myarray[1] << " = " << (findSqrtValue(myarray[1]))<< endl ;
+              												output<<fixed << setprecision(4) << "Square root of "<< myarray[1] << " = " << (findSqrtValue(myarray[1]))<< endl ;
+              												break ;
+												}
+												cout<<fixed << setprecision(4) << "Square root of "<< myarray[0] + (myarray[2]*i) << " = " << (findSqrtValue(myarray[0] + (myarray[2]*i)))<< endl ;
+            											output<<fixed << setprecision(4) << "Square root of "<< myarray[0] + (myarray[2]*i) << " = " << (findSqrtValue(myarray[0] + (myarray[2]*i)))<< endl ;
+            											i++ ;
+												if ( i == ENTRIES)
+													break;
+											}
+										}
+									}
+									else  if ( letter == 'L' || letter == 'l'){
+										if ( myarray[2] <= 0 || (myarray[0] > myarray[1])){
+											cout<<"No computation needed."<< endl ;
+    											output<<"No computation needed."<< endl ;
+										}
+										else{
+											int i = 0 ;
+											while (true){
+												if ( (myarray[0]+ (myarray[2]*i)) >= myarray[1]){
+													cout<<fixed << setprecision(4) << "Natural log of "<< myarray[1] << " = " << (naturalLog(myarray[1]))<< endl ;
+              												output<<fixed << setprecision(4) << "Natural log of "<< myarray[1] << " = " << (naturalLog(myarray[1]))<< endl ;
+													break ;
+												}
+												cout<<fixed << setprecision(4) << "Natural log of "<< myarray[0] + (myarray[2]*i) << " = " << (naturalLog(myarray[0] + (myarray[2]*i)))<< endl ;
+            											output<<fixed << setprecision(4) << "Natural log of "<< myarray[0] + (myarray[2]*i) << " = " << (naturalLog(myarray[0] + (myarray[2]*i)))<< endl ;
+												i++ ;
+												
+												if ( i == ENTRIES)
+													break;
+											}
+										}
+									}
+									else  if ( letter == 'N' || letter == 'n'){
+										if ( myarray[2] <= 0 || myarray[0] > myarray[1]){
+											cout<<"No computation needed."<< endl ;
+											output<<"No computation needed."<< endl ;
+										}
+										else{
+											int i = 0 ;
+											while (true){
+												if ( (myarray[0]+ (myarray[2]*i)) >= myarray[1]){
+													cout<<fixed << setprecision(4) << "NyanCat value of "<< myarray[1] << " = " << (findNyanCatValue(myarray[1]))<< endl ;
+              												output<<fixed << setprecision(4) << "NyanCat value of "<< myarray[1] << " = " << (findNyanCatValue(myarray[1]))<< endl ;
+													break ;
+												}
+												
+												cout<<fixed << setprecision(4) << "Nyancat value of "<< myarray[0] + (myarray[2]*i) << " = " << (findNyanCatValue(myarray[0] + (myarray[2]*i)))<< endl ;
+												output<<fixed << setprecision(4) << "Nyancat value of "<< myarray[0] + (myarray[2]*i) << " = " << (findNyanCatValue(myarray[0] + (myarray[2]*i)))<< endl ;
+												i++ ;
+												
+												if ( i == ENTRIES )
+													break;
+											}
+										}
+									}
+									else if ( letter == 'D' || letter == 'd'){
+										int number = 0 ;
+										int i = 0 ; 
+      										cout<< myarray[0] << " " ; ;
+      										output<< myarray[0] << " " ; ;
+										while (true){
+											number = findNextOddValue ((int)myarray[0]) ;
+											
+											if ( ( (number + 1) == (int)myarray[1] ) || ((number + 2) == (int)myarray[1] ) ){
+												cout << myarray[1] << endl ;
+												output << myarray[1] << endl ;
+          											break ;
+											}
+											
+											cout << number << " ";
+											output << number << " ";
+											myarray[0] = number ;
+											i++ ;
+											
+											if ( i == ENTRIES)
+												break ;
+										}
+									}
+								}
+							}
+						}
+						
+						else if ( code1 == 'B' || code1 =='b'){
+							int input2 ;
+	      						cout<<"Please enter command parameters: " ;
+	      						cin>>input2 ;
+	      						cout<<"fibonacci"<<input2<<") "<<" = " << fibonacci(input2)<<endl ;
+		  					output<< "Please enter command parameters: " << input2 << endl ;
+		 					output<<"fibonacci("<<input2<<") "<<" = " << fibonacci(input2)<<endl ;
+						}
+						
+						else  if ( code1 == 'R' || code1 == 'r'){
+							double input3[3];
+							cout<< "Please enter command parameters: ";
+							output<< "Please enter command parameters: ";
+							
+							for(int i = 0 ; i<3 ; i++ ){
+								cin>> input3[i] ;
+								output << input3[i] << " " ;
+							}
+							
+							output<< endl ;
+							
+							if (input3[2] <= 0 || (input3[0] > input3[1])){
+								cout<<"No computation needed."<< endl ;
+								output<<"No computation needed."<< endl ;
+							}
+							else{
+								int i = 0 ;
+								
+								while (true){
+									if ( (input3[0]+ (input3[2]*i)) >= input3[1]){ 
+										cout<<fixed << setprecision(4) << "Square root of "<< input3[1] << " = " << (findSqrtValue(input3[1]))<< endl ;
+	      									output<<fixed << setprecision(4) << "Square root of "<< input3[1] << " = " << (findSqrtValue(input3[1]))<< endl ;
+	      									break ;
+									}
+									
+									cout<<fixed << setprecision(4) << "Square root of "<< input3[0] + (input3[2]*i) << " = " << (findSqrtValue(input3[0] + (input3[2]*i)))<< endl ;
+	      								output<<fixed << setprecision(4) << "Square root of "<< input3[0] + (input3[2]*i) << " = " << (findSqrtValue(input3[0] + (input3[2]*i)))<< endl ;
+	      								i++ ;
+									
+									if ( i == ENTRIES)
+										break;
+								}
+							}
+						}
+						
+						else  if ( code1 == 'L' || code1 == 'l'){
+							double input4[3];
+							cout<< "Please enter command parameters: " ;
+	      						output<< "Please enter command parameters: " ;
+	      						int i = 0 ;
+							
+							while(i<3){
+								cin>> input4[i] ;
+		  						output<< input4[i] << " " ;
+		  						i++ ;
+							}
+							
+							output << endl ;
+							if ( input4[2] <= 0 || (input4[0] > input4[1])){
+								cout<<"No computation needed."<< endl ;
+								output<<"No computation needed."<< endl ;
+							}
+							else{
+								int i = 0 ;
+								
+								while (true){
+									if ( (input4[0]+ (input4[2]*i)) >= input4[1]){
+										cout<<fixed << setprecision(4) << "Natural log of "<< input4[1] << " = " << (naturalLog(input4[1]))<< endl ;
+										output<<fixed << setprecision(4) << "Natural log of "<< input4[1] << " = " << (naturalLog(input4[1]))<< endl ;
+										break ;
+									}
+									
+									cout<<fixed << setprecision(4) << "Natural log of "<< input4[0] + (input4[2]*i) << " = " << (naturalLog(input4[0] + (input4[2]*i)))<< endl ;
+	      								output<<fixed << setprecision(4) << "Natural log of "<< input4[0] + (input4[2]*i) << " = " << (naturalLog(input4[0] + (input4[2]*i)))<< endl ;
+	      								i++ ;
+									
+									if ( i == ENTRIES)
+										break;
+								}
+							}
+						}
+						
+						else  if ( code1 == 'N' || code1 == 'n'){
+							double input5[3];
+	      						cout<< "Please enter command parameters: " ;
+	      						output<< "Please enter command parameters: " ;
+	     				 		int i = 0 ;
+							
+							while ( i <3 ){
+								cin>> input5[i] ;
+		  						output<< input5[i] << " ";
+		  						i++ ;
+							}
+							
+							output<<endl ;
+							
+							if (input5[2] <= 0 || (input5[0] > input5[1])){
+								cout<<"No computation needed."<< endl ;
+								output<<"No computation needed."<< endl ;
+							}
+							else {
+								int i = 0 ;
+								
+								while (true){
+									if ( (input5[0]+ (input5[2]*i)) >= input5[1]){
+										cout<<fixed << setprecision(4) << "NyanCat value of "<< input5[1] << " = " << (findNyanCatValue(input5[1]))<< endl ;
+	      									output<<fixed << setprecision(4) << "NyanCat value of "<< input5[1] << " = " << (findNyanCatValue(input5[1]))<< endl ;
+	      									break ;
+									}
+									
+									cout<<fixed << setprecision(4) << "Nyancat value of "<< input5[0] + (input5[2]*i) << " = " << (findNyanCatValue(input5[0] + (input5[2]*i)))<< endl ;
+	      								output<<fixed << setprecision(4) << "Nyancat value of "<< input5[0] + (input5[2]*i) << " = " << (findNyanCatValue(input5[0] + (input5[2]*i)))<< endl ;
+	      								i++ ;
+									
+									if ( i == ENTRIES )
+										break;
+								}
+							}
+						}
 
 
 
